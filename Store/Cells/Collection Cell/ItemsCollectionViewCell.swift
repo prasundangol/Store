@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ItemsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
@@ -28,10 +29,11 @@ class ItemsCollectionViewCell: UICollectionViewCell {
         
     }
     
-    public func configure(){
-        itemImage.image = UIImage(named: "orange")
-        itemNameLabel.text = "Orange"
-        priceLabel.text = "Rs. 190"
+    public func configure(item: ItemModel){
+        guard let url = URL(string: item.Photo!) else { return }
+        itemImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: .highPriority)
+        itemNameLabel.text = item.Name
+        priceLabel.text = ("Rs. ")+(item.Price!)
     }
 
 }

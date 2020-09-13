@@ -11,5 +11,6 @@ target 'Store' do
 	pod 'Firebase/Auth'
 	pod 'Firebase/Core'
 	pod 'Firebase/Firestore'
+	pod 'SDWebImage', '~> 5.0'
 
 end

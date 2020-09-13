@@ -15,6 +15,13 @@
 		CD01875B25061C800084A468 /* TitleTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD01875925061C800084A468 /* TitleTableViewCell.xib */; };
 		CD01875E25061D2C0084A468 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01875C25061D2C0084A468 /* TitleCollectionViewCell.swift */; };
 		CD01875F25061D2C0084A468 /* TitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD01875D25061D2C0084A468 /* TitleCollectionViewCell.xib */; };
+		CDC9BACD250C7A7A00DA6E66 /* Constants .swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BACC250C7A7A00DA6E66 /* Constants .swift */; };
+		CDC9BAD3250C7C3200DA6E66 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */; };
+		CDC9BAD6250C7FA700DA6E66 /* ListCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BAD4250C7FA700DA6E66 /* ListCollectionViewCell.swift */; };
+		CDC9BAD7250C7FA700DA6E66 /* ListCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9BAD5250C7FA700DA6E66 /* ListCollectionViewCell.xib */; };
+		CDC9BAD9250CE1B500DA6E66 /* Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BAD8250CE1B500DA6E66 /* Utility.swift */; };
+		CDC9BADC250D32CA00DA6E66 /* HeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BADA250D32CA00DA6E66 /* HeaderTableViewCell.swift */; };
+		CDC9BADD250D32CA00DA6E66 /* HeaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9BADB250D32CA00DA6E66 /* HeaderTableViewCell.xib */; };
 		CDC9C9C725073EC000E466C1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = CDC9C9C625073EC000E466C1 /* GoogleService-Info.plist */; };
 		CDC9C9CA250744D600E466C1 /* ItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9C9C8250744D600E466C1 /* ItemsTableViewCell.swift */; };
 		CDC9C9CB250744D600E466C1 /* ItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9C9C9250744D600E466C1 /* ItemsTableViewCell.xib */; };
@@ -39,6 +46,13 @@
 		CD01875925061C800084A468 /* TitleTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleTableViewCell.xib; sourceTree = "<group>"; };
 		CD01875C25061D2C0084A468 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		CD01875D25061D2C0084A468 /* TitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionViewCell.xib; sourceTree = "<group>"; };
+		CDC9BACC250C7A7A00DA6E66 /* Constants .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants .swift"; sourceTree = "<group>"; };
+		CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		CDC9BAD4250C7FA700DA6E66 /* ListCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCollectionViewCell.swift; sourceTree = "<group>"; };
+		CDC9BAD5250C7FA700DA6E66 /* ListCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListCollectionViewCell.xib; sourceTree = "<group>"; };
+		CDC9BAD8250CE1B500DA6E66 /* Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utility.swift; sourceTree = "<group>"; };
+		CDC9BADA250D32CA00DA6E66 /* HeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderTableViewCell.swift; sourceTree = "<group>"; };
+		CDC9BADB250D32CA00DA6E66 /* HeaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderTableViewCell.xib; sourceTree = "<group>"; };
 		CDC9C9C625073EC000E466C1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		CDC9C9C8250744D600E466C1 /* ItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTableViewCell.swift; sourceTree = "<group>"; };
 		CDC9C9C9250744D600E466C1 /* ItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsTableViewCell.xib; sourceTree = "<group>"; };
@@ -82,6 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				CD01874E25061A130084A468 /* Core */,
+				CDC9BACE250C7BB600DA6E66 /* Extras */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -113,6 +128,8 @@
 				CD01875925061C800084A468 /* TitleTableViewCell.xib */,
 				CDC9C9C8250744D600E466C1 /* ItemsTableViewCell.swift */,
 				CDC9C9C9250744D600E466C1 /* ItemsTableViewCell.xib */,
+				CDC9BADA250D32CA00DA6E66 /* HeaderTableViewCell.swift */,
+				CDC9BADB250D32CA00DA6E66 /* HeaderTableViewCell.xib */,
 			);
 			path = "Table Cell";
 			sourceTree = "<group>";
@@ -124,8 +141,27 @@
 				CD01875D25061D2C0084A468 /* TitleCollectionViewCell.xib */,
 				CDC9C9CC250748B700E466C1 /* ItemsCollectionViewCell.swift */,
 				CDC9C9CD250748B700E466C1 /* ItemsCollectionViewCell.xib */,
+				CDC9BAD4250C7FA700DA6E66 /* ListCollectionViewCell.swift */,
+				CDC9BAD5250C7FA700DA6E66 /* ListCollectionViewCell.xib */,
 			);
 			path = "Collection Cell";
+			sourceTree = "<group>";
+		};
+		CDC9BACB250C7A5C00DA6E66 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CDC9BACC250C7A7A00DA6E66 /* Constants .swift */,
+				CDC9BAD8250CE1B500DA6E66 /* Utility.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CDC9BACE250C7BB600DA6E66 /* Extras */ = {
+			isa = PBXGroup;
+			children = (
+				CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */,
+			);
+			path = Extras;
 			sourceTree = "<group>";
 		};
 		CDC9C9D02507847100E466C1 /* Model */ = {
@@ -159,6 +195,7 @@
 			children = (
 				CDDB296B25061237002EEE03 /* AppDelegate.swift */,
 				CDDB296D25061237002EEE03 /* SceneDelegate.swift */,
+				CDC9BACB250C7A5C00DA6E66 /* Utilities */,
 				CD01874D25061A080084A468 /* View Controllers */,
 				CD01875525061BA30084A468 /* Cells */,
 				CDC9C9D02507847100E466C1 /* Model */,
@@ -215,6 +252,7 @@
 				TargetAttributes = {
 					CDDB296725061237002EEE03 = {
 						CreatedOnToolsVersion = 11.5;
+						LastSwiftMigration = 1150;
 					};
 				};
 			};
@@ -246,8 +284,10 @@
 				CDDB297B2506123B002EEE03 /* LaunchScreen.storyboard in Resources */,
 				CDC9C9CB250744D600E466C1 /* ItemsTableViewCell.xib in Resources */,
 				CDDB29782506123B002EEE03 /* Assets.xcassets in Resources */,
+				CDC9BAD7250C7FA700DA6E66 /* ListCollectionViewCell.xib in Resources */,
 				CDC9C9CF250748B700E466C1 /* ItemsCollectionViewCell.xib in Resources */,
 				CDDB297325061237002EEE03 /* Main.storyboard in Resources */,
+				CDC9BADD250D32CA00DA6E66 /* HeaderTableViewCell.xib in Resources */,
 				CDC9C9C725073EC000E466C1 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,12 +345,17 @@
 				CDC9C9D22507848700E466C1 /* Model.swift in Sources */,
 				CD01875A25061C800084A468 /* TitleTableViewCell.swift in Sources */,
 				CDDB297025061237002EEE03 /* ShopViewController.swift in Sources */,
+				CDC9BAD3250C7C3200DA6E66 /* ListViewController.swift in Sources */,
 				CD01875225061A660084A468 /* MyOrdersViewController.swift in Sources */,
+				CDC9BAD6250C7FA700DA6E66 /* ListCollectionViewCell.swift in Sources */,
 				CD01875425061A720084A468 /* AccountViewController.swift in Sources */,
 				CDDB296C25061237002EEE03 /* AppDelegate.swift in Sources */,
 				CDC9C9CE250748B700E466C1 /* ItemsCollectionViewCell.swift in Sources */,
 				CD01875025061A540084A468 /* CartViewController.swift in Sources */,
 				CD01875E25061D2C0084A468 /* TitleCollectionViewCell.swift in Sources */,
+				CDC9BAD9250CE1B500DA6E66 /* Utility.swift in Sources */,
+				CDC9BACD250C7A7A00DA6E66 /* Constants .swift in Sources */,
+				CDC9BADC250D32CA00DA6E66 /* HeaderTableViewCell.swift in Sources */,
 				CDDB296E25061237002EEE03 /* SceneDelegate.swift in Sources */,
 				CDDB297625061237002EEE03 /* Store.xcdatamodeld in Sources */,
 			);
@@ -457,6 +502,7 @@
 			baseConfigurationReference = F3201506E06F506947DD7C3F /* Pods-Store.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Store/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -465,6 +511,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Prasun.Store;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -475,6 +522,7 @@
 			baseConfigurationReference = B609AB68778FDD27C749602F /* Pods-Store.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Store/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

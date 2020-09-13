@@ -8,13 +8,20 @@
 
 import UIKit
 
+protocol TitleTableViewCellDelegate: AnyObject {
+    func didSelectItem(with title: String )
+}
+
 class TitleTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleCollectionView: UICollectionView!
     
     static let identifier = "TitleTableViewCell"
+    public weak var delegate: TitleTableViewCellDelegate?
     
     private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks", "Bakery", "Grocery"]
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    var navigationController = UINavigationController()
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -57,6 +64,7 @@ class TitleTableViewCell: UITableViewCell {
     }
     
     
+    
 }
 
 extension TitleTableViewCell: UICollectionViewDataSource, UICollectionViewDelegate{
@@ -72,7 +80,9 @@ extension TitleTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("Tapped")
+        let item: String
+        item = titles[indexPath.row]       
+        delegate?.didSelectItem(with: item)
     }
     
 }

@@ -14,10 +14,13 @@ class ItemsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var itemCollectionView: UICollectionView!
     
+    
     static let identifier = "ItemsTableViewCell"
-    var itemArray = [ItemModel]()
-    let titles = ["Fruits", "Vegtables"]
-
+    var firstItemArray: [ItemModel] = []
+    var secondItemArray: [ItemModel] = []
+    var totalItems: [[ItemModel]] = []
+    var titles = ["Fruits"]
+    
     
     
     override func awakeFromNib() {
@@ -26,20 +29,14 @@ class ItemsTableViewCell: UITableViewCell {
         itemCollectionView.delegate = self
         itemCollectionView.dataSource = self
         listCellStyle()
-        FirebaseOperation.shared.getData(of: titles) { (data) in
-            self.itemArray = data
-            print(self.itemArray)
-            print("step 2")
-            
-        }
-
-
+        itemCollectionView.showsHorizontalScrollIndicator = false
+        itemCollectionView.reloadData()
     }
     
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
     
@@ -58,28 +55,54 @@ class ItemsTableViewCell: UITableViewCell {
         self.itemCollectionView.collectionViewLayout = layout
     }
     
-    
+    public func configureFirstSection(item: String){
+        FirebaseOperation.shared.getData(of: item) { (data) in
+            self.totalItems.removeAll()
+            self.firstItemArray.append(data)
+            self.totalItems.append(self.firstItemArray)
+            DispatchQueue.main.async {
+                self.itemCollectionView.reloadData()
+            }
+        }
+    }
+        public func configureSecondSection(item: String){
+            FirebaseOperation.shared.getData(of: item) { (data) in
+                self.totalItems.removeAll()
+                self.secondItemArray.append(data)
+                self.totalItems.append(self.secondItemArray)
+                DispatchQueue.main.async {
+                    self.itemCollectionView.reloadData()
+                }
+            }
+
+
+    }
 }
 
 extension ItemsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return totalItems.count
+    }
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemsCollectionViewCell.identifier, for: indexPath) as! ItemsCollectionViewCell
-       // let item: ItemModel
-        let item = itemArray.count
-        print("Total Items: \(item)")
-        
-            cell.configure()
+        let item = self.totalItems[indexPath.section][indexPath.item]
+        cell.configure(item: item)
         cell.layer.masksToBounds = true
         cell.layer.cornerRadius = 30
         cell.layer.borderColor = UIColor.gray.cgColor
         cell.layer.borderWidth = 1
+        
         return cell
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("selected: \(indexPath.item)")
+    }
     
 }
