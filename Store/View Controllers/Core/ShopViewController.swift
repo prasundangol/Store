@@ -11,19 +11,35 @@ import UIKit
 class ShopViewController: UIViewController {
     
     @IBOutlet weak var titleTable: UITableView!
-    private var models = [ItemModel]()
+    
+    static let identifier = "ShopViewController"
+    private let itemController = ItemsTableViewCell()
+    private var itemModels = [ItemModel]()
     var sectionItems = [String]()
-    private let titles = ["Fruits", "Vegtables", "Drinks"]
+    private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Shop"
         titleTable.delegate = self
         titleTable.dataSource = self
+        getData()
         configureCell()
         titleTable.showsVerticalScrollIndicator = false
         for _ in 1...2{
             sectionItems.append(titles.randomElement()!)
+        }
+
+    }
+    
+    
+    private func getData(){
+        FirebaseOperation.shared.getData(of: "Drinks") { (data) in
+            //self.itemModels.removeAll()
+            self.itemModels.append(data)
+            DispatchQueue.main.async {
+                self.titleTable.reloadData()
+            }
         }
     }
     
@@ -31,21 +47,31 @@ class ShopViewController: UIViewController {
         titleTable.register(TitleTableViewCell.nib(), forCellReuseIdentifier: TitleTableViewCell.identifier)
         titleTable.register(ItemsTableViewCell.nib(), forCellReuseIdentifier: ItemsTableViewCell.identifier)
         titleTable.register(HeaderTableViewCell.nib(), forCellReuseIdentifier: HeaderTableViewCell.identifier)
-    
+        titleTable.register(ListTableViewCell.nib(), forCellReuseIdentifier: ListTableViewCell.identifier)
+        
     }
     
-
-
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Consatnts.shopToDetailSegue{
+            let destVC = segue.destination as! DetailViewController
+            destVC.item = sender as! ItemModel
+            
+        }
+    }
 }
 
 extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        if section == 3{
+            return itemModels.prefix(4).count
+        }
+        else{
+            return 1
+        }
         
     }
     
@@ -55,35 +81,32 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
             cell.delegate = self
             return cell
         }
-//        if indexPath.section%2 != 0 {
-//            let cell = titleTable.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier) as! HeaderTableViewCell
-//            if indexPath.section == 1{
-//                cell.configure(item: titles[0])
-//            }
-//            if indexPath.section == 3{
-//                cell.configure(item: titles[1])
-//            }
-//            if indexPath.section == 5{
-//                cell.configure(item: titles[2])
-//            }
-//            cell.delegate = self
-//            return cell
-//        }
-        if indexPath.section != 0{
+        switch indexPath.section {
+        case 1 :
             let cell =  titleTable.dequeueReusableCell(withIdentifier: ItemsTableViewCell.identifier, for: indexPath) as! ItemsTableViewCell
-            if indexPath.section == 1{
-                cell.configureFirstSection(item: titles[0])
-            }
-            if indexPath.section == 2{
-                cell.configureSecondSection(item: titles[1])
-            }
+            cell.configureFirstSection(item: titles[0])
+            cell.delegate = self
+            return cell
+        case 2:
+            let cell =  titleTable.dequeueReusableCell(withIdentifier: ItemsTableViewCell.identifier, for: indexPath) as! ItemsTableViewCell
+            cell.configureFirstSection(item: titles[1])
+            cell.delegate = self
             return cell
             
+        case 3:
+            let bottomCell = titleTable.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
+            let item = itemModels[indexPath.item]
+            bottomCell.configure(with: item)
+            return bottomCell
+        default:
+            return UITableViewCell()
         }
-        return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section > 0{
+            return 230
+        }
         return 250
     }
     
@@ -105,7 +128,15 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
         }
         return 0
     }
-
+    
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            if indexPath.section == 3{
+                titleTable.deselectRow(at: indexPath, animated: true)
+                let items = itemModels[indexPath.row]
+                performSegue(withIdentifier: Consatnts.shopToDetailSegue, sender: items)
+            }
+        }
+    
 }
 
 extension ShopViewController: TitleTableViewCellDelegate{
@@ -126,6 +157,12 @@ extension ShopViewController: HeaderTableViewCellDelegate{
     }
     
     
+}
+
+extension ShopViewController: ItemsTableViewCellDelegate{
+    func didSelectCollectionItem(with item: ItemModel) {
+        performSegue(withIdentifier: Consatnts.shopToDetailSegue, sender: item)
+    }
 }
 
 

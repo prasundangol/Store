@@ -7,24 +7,17 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class MyOrdersViewController: UIViewController {
+    
+     let window = UIWindow(frame: UIScreen.main.bounds)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Orders"
-        // Do any additional setup after loading the view.
+        Utility.checkIfUserIsLoggedIn(viewController: self)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

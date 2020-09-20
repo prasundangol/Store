@@ -24,11 +24,7 @@ class HeaderTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.backgroundColor = .white
-        viewAllButton.layer.masksToBounds = true
-        viewAllButton.layer.cornerRadius = 10
-        viewAllButton.layer.borderColor = UIColor.gray.cgColor
-        viewAllButton.layer.borderWidth = 1
+        self.backgroundColor = .systemBackground
         // Initialization code
     }
 

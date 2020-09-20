@@ -19,8 +19,7 @@ class ItemsCollectionViewCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        // Initialization code
+        priceLabel.textColor = .systemGreen
     }
     
     

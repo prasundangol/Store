@@ -56,6 +56,13 @@ class ListViewController: UIViewController {
         
         
     }
+    
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == Consatnts.listToDetailSegue{
+            let destVC = segue.destination as! DetailViewController
+            destVC.item = sender as! ItemModel
+        }
+    }
 
 }
 
@@ -74,21 +81,9 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = model[indexPath.row]
+        performSegue(withIdentifier: Consatnts.listToDetailSegue, sender: item)
+    }
     
 }
-
-//extension ListViewController: UICollectionViewDelegateFlowLayout{
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let width = listCollectionView.bounds.width
-//        return CGSize(width: width/4 - 5, height: 240)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 5
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 5
-//    }
-//}

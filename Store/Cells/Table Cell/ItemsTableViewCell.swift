@@ -9,6 +9,10 @@
 import UIKit
 import FirebaseFirestore
 
+protocol ItemsTableViewCellDelegate: AnyObject {
+    func didSelectCollectionItem(with item: ItemModel)
+}
+
 class ItemsTableViewCell: UITableViewCell {
     
     
@@ -20,7 +24,7 @@ class ItemsTableViewCell: UITableViewCell {
     var secondItemArray: [ItemModel] = []
     var totalItems: [[ItemModel]] = []
     var titles = ["Fruits"]
-    
+    public weak var delegate: ItemsTableViewCellDelegate?
     
     
     override func awakeFromNib() {
@@ -47,7 +51,7 @@ class ItemsTableViewCell: UITableViewCell {
     
     private func listCellStyle(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 280 , height: 200)
+        layout.itemSize = CGSize(width: 280 , height: 180)
         layout.sectionInset = UIEdgeInsets.zero
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
@@ -102,7 +106,8 @@ extension ItemsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("selected: \(indexPath.item)")
+        let item = totalItems[indexPath.section][indexPath.row]
+        delegate?.didSelectCollectionItem(with: item)
     }
     
 }

@@ -23,14 +23,14 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Plb-XK-4di">
-                        <rect key="frame" x="10" y="120" width="257" height="50"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="10" y="120" width="257" height="55.5"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2h-k6-hG6">
-                        <rect key="frame" x="10" y="180" width="257" height="21"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <rect key="frame" x="10" y="180.5" width="257" height="20.5"/>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -45,7 +45,7 @@
                 <constraint firstItem="EQ2-Nt-82u" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="UCN-PW-DsM"/>
                 <constraint firstItem="EQ2-Nt-82u" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="bdh-Pe-EMc"/>
                 <constraint firstItem="O2h-k6-hG6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="10" id="bxb-CS-C2W"/>
-                <constraint firstItem="O2h-k6-hG6" firstAttribute="top" secondItem="Plb-XK-4di" secondAttribute="bottom" constant="10" id="rPF-d8-p1w"/>
+                <constraint firstItem="O2h-k6-hG6" firstAttribute="top" secondItem="Plb-XK-4di" secondAttribute="bottom" constant="5" id="rPF-d8-p1w"/>
                 <constraint firstItem="EQ2-Nt-82u" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="10" id="wkJ-ak-wE9"/>
                 <constraint firstAttribute="bottom" secondItem="O2h-k6-hG6" secondAttribute="bottom" constant="10" id="yyB-DK-GfW"/>
             </constraints>
