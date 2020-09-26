@@ -29,6 +29,7 @@ class ItemsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        itemCollectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         itemCollectionView.register(ItemsCollectionViewCell.nib(), forCellWithReuseIdentifier: ItemsCollectionViewCell.identifier)
         itemCollectionView.delegate = self
         itemCollectionView.dataSource = self
@@ -51,11 +52,11 @@ class ItemsTableViewCell: UITableViewCell {
     
     private func listCellStyle(){
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 280 , height: 180)
-        layout.sectionInset = UIEdgeInsets.zero
+        layout.itemSize = CGSize(width: 180 , height: 180)
+        layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         layout.scrollDirection = .horizontal
-        layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 15
+        layout.minimumInteritemSpacing = 15
         self.itemCollectionView.collectionViewLayout = layout
     }
     
@@ -97,11 +98,7 @@ extension ItemsTableViewCell: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = itemCollectionView.dequeueReusableCell(withReuseIdentifier: ItemsCollectionViewCell.identifier, for: indexPath) as! ItemsCollectionViewCell
         let item = self.totalItems[indexPath.section][indexPath.item]
         cell.configure(item: item)
-        cell.layer.masksToBounds = true
-        cell.layer.cornerRadius = 30
-        cell.layer.borderColor = UIColor.gray.cgColor
-        cell.layer.borderWidth = 1
-        
+        Utility.stylingCollectionViewCell(cell: cell)
         return cell
     }
     

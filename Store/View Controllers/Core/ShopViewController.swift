@@ -11,6 +11,7 @@ import UIKit
 class ShopViewController: UIViewController {
     
     @IBOutlet weak var titleTable: UITableView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     static let identifier = "ShopViewController"
     private let itemController = ItemsTableViewCell()
@@ -21,6 +22,8 @@ class ShopViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Shop"
+        activityIndicator.startAnimating()
+        navigationController?.navigationBar.tintColor = UIColor.systemGreen
         titleTable.delegate = self
         titleTable.dataSource = self
         getData()
@@ -31,7 +34,6 @@ class ShopViewController: UIViewController {
         }
 
     }
-    
     
     private func getData(){
         FirebaseOperation.shared.getData(of: "Drinks") { (data) in
@@ -97,6 +99,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
             let bottomCell = titleTable.dequeueReusableCell(withIdentifier: ListTableViewCell.identifier, for: indexPath) as! ListTableViewCell
             let item = itemModels[indexPath.item]
             bottomCell.configure(with: item)
+            self.activityIndicator.stopAnimating()
             return bottomCell
         default:
             return UITableViewCell()
@@ -107,7 +110,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
         if indexPath.section > 0{
             return 230
         }
-        return 250
+        return 220
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -119,7 +122,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
     
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 10
+        return 5
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

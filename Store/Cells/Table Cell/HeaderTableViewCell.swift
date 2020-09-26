@@ -25,6 +25,12 @@ class HeaderTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .systemBackground
+        viewAllButton.layer.masksToBounds = false
+        viewAllButton.clipsToBounds = false
+        viewAllButton.layer.shadowOpacity = 0.5
+        viewAllButton.layer.shadowRadius = 5
+        viewAllButton.layer.shadowOffset = CGSize(width: 3, height: 4)
+        viewAllButton.layer.shadowColor = UIColor.systemOrange.cgColor
         // Initialization code
     }
 

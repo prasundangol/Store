@@ -11,6 +11,7 @@ import UIKit
 class ListViewController: UIViewController {
 
     @IBOutlet weak var listCollectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     static let identifier = "ListViewController"
     private var model: [ItemModel] = []
@@ -18,6 +19,7 @@ class ListViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        activityIndicator.startAnimating()
         listCollectionView.delegate = self
         listCollectionView.dataSource = self
         self.title = listTitle
@@ -47,8 +49,8 @@ class ListViewController: UIViewController {
         let width = (listCollectionView.frame.size.width-(itemsInRow - 1) * interItemSpacing) / itemsInRow
         let height = width + 20
         
-        layout.itemSize = CGSize(width: width - 10, height: height)
-        layout.sectionInset = .zero
+        layout.itemSize = CGSize(width: width - 20, height: height)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
         layout.minimumLineSpacing = lineSpacing
         layout.minimumInteritemSpacing = interItemSpacing
         
@@ -74,10 +76,9 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = listCollectionView.dequeueReusableCell(withReuseIdentifier: ListCollectionViewCell.identifier, for: indexPath) as! ListCollectionViewCell
         cell.setUp(items: model[indexPath.item])
-       cell.layer.masksToBounds = true
-       cell.layer.cornerRadius = 30
-       cell.layer.borderColor = UIColor.gray.cgColor
-       cell.layer.borderWidth = 1
+       
+        self.activityIndicator.stopAnimating()
+        Utility.stylingCollectionViewCell(cell: cell)
         return cell
     }
     

@@ -16,14 +16,10 @@ struct ItemModel {
     var Photo: String?
     var Price: String?
     var Stock: Bool?
-    
-    
-
 }
 
 class FirebaseOperation{
     
-    //private init(){}
     let db = Firestore.firestore()
     static let shared = FirebaseOperation()    
    

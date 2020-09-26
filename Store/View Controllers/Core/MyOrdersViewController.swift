@@ -16,6 +16,9 @@ class MyOrdersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "My Orders"
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         Utility.checkIfUserIsLoggedIn(viewController: self)
     }
     

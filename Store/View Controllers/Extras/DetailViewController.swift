@@ -18,9 +18,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var stockLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var addToCartButton: UIButton!
-    @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
+    @IBOutlet weak var itemsInCartCountLabel: UILabel!
+    @IBOutlet weak var bottomView: UIView!
     
     var item = ItemModel()
     static let identifier = "DetailViewController"
@@ -29,15 +30,14 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = UIColor.systemGray6
         configure()
         styling()
-        print(item)
-        // Do any additional setup after loading the view.
     }
     
     private func configure(){
         guard let url = URL(string: item.Photo!) else { return }
-        itemImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: .highPriority)
+        itemImage.sd_setImage(with: url, placeholderImage: nil, options: .highPriority)
         titleLabel.text = item.Name
         priceLabel.text = ("Rs. ")+(item.Price!)
         quantityLabel.text = "1"
@@ -54,13 +54,30 @@ class DetailViewController: UIViewController {
     }
     
     private func styling(){
-        Utility.styleFilledButton(addToCartButton)
-        Utility.styleHollowButton(cancelButton)
+        addToCartButton.clipsToBounds = true
+        addToCartButton.layer.masksToBounds = true
+        addToCartButton.layer.cornerRadius = 25
+        addToCartButton.tintColor = UIColor.black
+        addToCartButton.buttonStyling()
+        //Utility.styleFilledButton(addToCartButton)
         Utility.styleIncreaseButton(increaseButton)
         Utility.styleDecreaseButton(decreaseButton)
         priceLabel.textColor = .systemGreen
         
+        //Bottom Layer Styling
+        bottomView.layer.masksToBounds = false
+        bottomView.clipsToBounds = false
+        bottomView.backgroundColor = UIColor.systemGray6
+        bottomView.layer.cornerRadius = 30
+        bottomView.layer.shadowColor = UIColor.black.cgColor
+        bottomView.layer.shadowOffset = CGSize(width: 2, height: 0)
+        bottomView.layer.shadowRadius = 5
+        bottomView.layer.shadowOpacity = 0.5
+        
+        itemsInCartCountLabel.text = "You have 3 items in cart"
     }
+    
+    
     
     private func sendToCart(){
         if let user = userId{
@@ -114,6 +131,10 @@ class DetailViewController: UIViewController {
     
     @IBAction func addToCartTapped(_ sender: Any) {
         guard let stock = item.Stock else {return}
+        guard let _ = userId else{
+            Utility.alert(title: "Cannot Add To Cart", msg: "You must login to add products to cart.", viewcontroller: self)
+            return
+        }
         if stock{
             sendToCart()
         }
@@ -123,8 +144,5 @@ class DetailViewController: UIViewController {
     }
     
     
-    @IBAction func cancelTapped(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
-    }
-    
 }
+

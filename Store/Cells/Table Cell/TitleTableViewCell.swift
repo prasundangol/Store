@@ -19,7 +19,7 @@ class TitleTableViewCell: UITableViewCell {
     static let identifier = "TitleTableViewCell"
     public weak var delegate: TitleTableViewCellDelegate?
     
-    private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks", "Bakery", "Grocery"]
+    private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks", "Dairy", "Grocery"]
     let storyboard = UIStoryboard(name: "Main", bundle: nil)
     var navigationController = UINavigationController()
     
@@ -51,10 +51,10 @@ class TitleTableViewCell: UITableViewCell {
         let interItemSpacing: CGFloat = 5
         
         let width = (titleCollectionView.frame.size.width-(itemsInRow - 1) * interItemSpacing) / itemsInRow
-        let height = width + 15
+        let height = width 
         
         layout.itemSize = CGSize(width: width, height: height)
-        layout.sectionInset = .zero
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         layout.minimumLineSpacing = lineSpacing
         layout.minimumInteritemSpacing = interItemSpacing
         
@@ -75,6 +75,15 @@ extension TitleTableViewCell: UICollectionViewDataSource, UICollectionViewDelega
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = titleCollectionView.dequeueReusableCell(withReuseIdentifier: TitleCollectionViewCell.identifier, for: indexPath) as! TitleCollectionViewCell
         cell.configure(with: titles[indexPath.row])
+        
+//        cell.layer.masksToBounds = false
+//        cell.clipsToBounds = false
+//        cell.backgroundColor = .systemBackground
+//        cell.layer.cornerRadius = 15
+//        cell.layer.shadowOffset = CGSize(width: 3, height: 4)
+//        cell.layer.shadowRadius = 3
+//        cell.layer.shadowColor = UIColor.darkGray.cgColor
+//        cell.layer.shadowOpacity = 0.5
         return cell
         
     }

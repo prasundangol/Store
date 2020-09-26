@@ -16,6 +16,9 @@
 		CD01875E25061D2C0084A468 /* TitleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD01875C25061D2C0084A468 /* TitleCollectionViewCell.swift */; };
 		CD01875F25061D2C0084A468 /* TitleCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CD01875D25061D2C0084A468 /* TitleCollectionViewCell.xib */; };
 		CD27E0B52514D62800B66705 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD27E0B42514D62800B66705 /* DetailViewController.swift */; };
+		CD39ADA4251A246A00F6BE67 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD39ADA3251A246A00F6BE67 /* SignUpViewController.swift */; };
+		CD6EC6F12518E4DD0030A1F3 /* CartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6EC6F02518E4DD0030A1F3 /* CartTableViewCell.swift */; };
+		CD6EC6F32518E57F0030A1F3 /* CartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD6EC6F22518E57F0030A1F3 /* CartModel.swift */; };
 		CD94FEA52515BAE800504B82 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD94FEA42515BAE800504B82 /* LoginViewController.swift */; };
 		CDC9BACD250C7A7A00DA6E66 /* Constants .swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BACC250C7A7A00DA6E66 /* Constants .swift */; };
 		CDC9BAD3250C7C3200DA6E66 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */; };
@@ -29,7 +32,7 @@
 		CDC9C9CB250744D600E466C1 /* ItemsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9C9C9250744D600E466C1 /* ItemsTableViewCell.xib */; };
 		CDC9C9CE250748B700E466C1 /* ItemsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9C9CC250748B700E466C1 /* ItemsCollectionViewCell.swift */; };
 		CDC9C9CF250748B700E466C1 /* ItemsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDC9C9CD250748B700E466C1 /* ItemsCollectionViewCell.xib */; };
-		CDC9C9D22507848700E466C1 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9C9D12507848700E466C1 /* Model.swift */; };
+		CDC9C9D22507848700E466C1 /* ItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDC9C9D12507848700E466C1 /* ItemModel.swift */; };
 		CDDB296C25061237002EEE03 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB296B25061237002EEE03 /* AppDelegate.swift */; };
 		CDDB296E25061237002EEE03 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB296D25061237002EEE03 /* SceneDelegate.swift */; };
 		CDDB297025061237002EEE03 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDDB296F25061237002EEE03 /* ShopViewController.swift */; };
@@ -51,6 +54,9 @@
 		CD01875C25061D2C0084A468 /* TitleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleCollectionViewCell.swift; sourceTree = "<group>"; };
 		CD01875D25061D2C0084A468 /* TitleCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TitleCollectionViewCell.xib; sourceTree = "<group>"; };
 		CD27E0B42514D62800B66705 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		CD39ADA3251A246A00F6BE67 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CD6EC6F02518E4DD0030A1F3 /* CartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartTableViewCell.swift; sourceTree = "<group>"; };
+		CD6EC6F22518E57F0030A1F3 /* CartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartModel.swift; sourceTree = "<group>"; };
 		CD94FEA42515BAE800504B82 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CDC9BACC250C7A7A00DA6E66 /* Constants .swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Constants .swift"; sourceTree = "<group>"; };
 		CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
@@ -64,7 +70,7 @@
 		CDC9C9C9250744D600E466C1 /* ItemsTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsTableViewCell.xib; sourceTree = "<group>"; };
 		CDC9C9CC250748B700E466C1 /* ItemsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsCollectionViewCell.swift; sourceTree = "<group>"; };
 		CDC9C9CD250748B700E466C1 /* ItemsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsCollectionViewCell.xib; sourceTree = "<group>"; };
-		CDC9C9D12507848700E466C1 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		CDC9C9D12507848700E466C1 /* ItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemModel.swift; sourceTree = "<group>"; };
 		CDDB296825061237002EEE03 /* Store.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Store.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CDDB296B25061237002EEE03 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CDDB296D25061237002EEE03 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -140,6 +146,7 @@
 				CDC9BADB250D32CA00DA6E66 /* HeaderTableViewCell.xib */,
 				CDF1E8032511DA2E00739470 /* ListTableViewCell.swift */,
 				CDF1E8042511DA2E00739470 /* ListTableViewCell.xib */,
+				CD6EC6F02518E4DD0030A1F3 /* CartTableViewCell.swift */,
 			);
 			path = "Table Cell";
 			sourceTree = "<group>";
@@ -172,6 +179,7 @@
 				CDC9BAD2250C7C3200DA6E66 /* ListViewController.swift */,
 				CD27E0B42514D62800B66705 /* DetailViewController.swift */,
 				CD94FEA42515BAE800504B82 /* LoginViewController.swift */,
+				CD39ADA3251A246A00F6BE67 /* SignUpViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -179,7 +187,8 @@
 		CDC9C9D02507847100E466C1 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				CDC9C9D12507848700E466C1 /* Model.swift */,
+				CDC9C9D12507848700E466C1 /* ItemModel.swift */,
+				CD6EC6F22518E57F0030A1F3 /* CartModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,11 +363,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CD6EC6F12518E4DD0030A1F3 /* CartTableViewCell.swift in Sources */,
 				CDC9C9CA250744D600E466C1 /* ItemsTableViewCell.swift in Sources */,
-				CDC9C9D22507848700E466C1 /* Model.swift in Sources */,
+				CDC9C9D22507848700E466C1 /* ItemModel.swift in Sources */,
 				CD01875A25061C800084A468 /* TitleTableViewCell.swift in Sources */,
 				CDDB297025061237002EEE03 /* ShopViewController.swift in Sources */,
 				CDC9BAD3250C7C3200DA6E66 /* ListViewController.swift in Sources */,
+				CD39ADA4251A246A00F6BE67 /* SignUpViewController.swift in Sources */,
 				CDF1E8052511DA2F00739470 /* ListTableViewCell.swift in Sources */,
 				CD01875225061A660084A468 /* MyOrdersViewController.swift in Sources */,
 				CDC9BAD6250C7FA700DA6E66 /* ListCollectionViewCell.swift in Sources */,
@@ -368,6 +379,7 @@
 				CD27E0B52514D62800B66705 /* DetailViewController.swift in Sources */,
 				CDC9C9CE250748B700E466C1 /* ItemsCollectionViewCell.swift in Sources */,
 				CD01875025061A540084A468 /* CartViewController.swift in Sources */,
+				CD6EC6F32518E57F0030A1F3 /* CartModel.swift in Sources */,
 				CD01875E25061D2C0084A468 /* TitleCollectionViewCell.swift in Sources */,
 				CDC9BAD9250CE1B500DA6E66 /* Utility.swift in Sources */,
 				CDC9BACD250C7A7A00DA6E66 /* Constants .swift in Sources */,

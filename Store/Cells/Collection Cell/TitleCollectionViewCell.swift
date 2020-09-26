@@ -18,7 +18,7 @@ class TitleCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         titleImage.layer.borderWidth = 1
-        titleImage.layer.borderColor = UIColor.lightGray.cgColor
+        titleImage.layer.borderColor = UIColor.systemGray.cgColor
         titleImage.clipsToBounds = true
         titleImage.layer.cornerRadius = 10
     }
@@ -34,3 +34,5 @@ class TitleCollectionViewCell: UICollectionViewCell {
     }
 
 }
+
+

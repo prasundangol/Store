@@ -12,7 +12,7 @@ import SDWebImage
 class ItemsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemNameLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
+    @IBOutlet weak var priceLabel: UILabel!    
     
     static let identifier = "ItemsCollectionViewCell"
     private var item = ItemModel()
