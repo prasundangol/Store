@@ -108,7 +108,7 @@ class Utility{
         cell.layer.masksToBounds = false
         cell.clipsToBounds = false
         cell.backgroundColor = .systemBackground
-        cell.layer.cornerRadius = 30
+        cell.layer.cornerRadius = 25
         //cell.backgroundGradient()
 
         
@@ -170,41 +170,33 @@ extension UIView{
     
 }
 
-extension CALayer{
-    func addGradientBorder(){
-        let gradientLayer = CAGradientLayer()
-        let color1 = UIColor(red: 18/255.0, green: 190/255.0, blue: 138/255.0, alpha: 1.0)
-        let color2 = UIColor(red: 10/255.0, green: 112/255.0, blue: 168/255.0, alpha: 1.0)
-        gradientLayer.frame =  CGRect(origin: .zero, size: self.bounds.size)
-        gradientLayer.colors = [color1.cgColor,color2.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
-        gradientLayer.endPoint = CGPoint(x: 1.0,y: 0.5)
+extension UITextField{
+    func paddingLeft(){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.borderStyle = .none
+        self.layer.cornerRadius = 25
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.systemGreen.cgColor
         
-        let shapeLayer = CAShapeLayer()
-        shapeLayer.lineWidth = 4
-        shapeLayer.path = UIBezierPath(rect: self.bounds).cgPath
-        shapeLayer.fillColor = nil
-        shapeLayer.strokeColor = UIColor.black.cgColor
-        gradientLayer.mask = shapeLayer
-        
-        self.addSublayer(gradientLayer)
+    }
+    
+    func notSelected(){
+        let paddingView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.size.height))
+        self.leftView = paddingView
+        self.leftViewMode = .always
+        self.clipsToBounds = true
+        self.layer.masksToBounds = true
+        self.borderStyle = .none
+        self.layer.cornerRadius = 25
+        self.layer.borderWidth = 2
+        self.layer.borderColor = UIColor.systemGray4.cgColor
         
     }
     
 }
 
-extension UIImage {
-    var averageColor: UIColor? {
-        guard let inputImage = CIImage(image: self) else { return nil }
-        let extentVector = CIVector(x: inputImage.extent.origin.x, y: inputImage.extent.origin.y, z: inputImage.extent.size.width, w: inputImage.extent.size.height)
 
-        guard let filter = CIFilter(name: "CIAreaAverage", parameters: [kCIInputImageKey: inputImage, kCIInputExtentKey: extentVector]) else { return nil }
-        guard let outputImage = filter.outputImage else { return nil }
-
-        var bitmap = [UInt8](repeating: 0, count: 4)
-        let context = CIContext(options: [.workingColorSpace: kCFNull!])
-        context.render(outputImage, toBitmap: &bitmap, rowBytes: 4, bounds: CGRect(x: 0, y: 0, width: 1, height: 1), format: .RGBA8, colorSpace: nil)
-
-        return UIColor(red: CGFloat(bitmap[0]) / 255, green: CGFloat(bitmap[1]) / 255, blue: CGFloat(bitmap[2]) / 255, alpha: CGFloat(0.7))
-    }
-}

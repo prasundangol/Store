@@ -46,8 +46,8 @@ class ListViewController: UIViewController {
         let lineSpacing: CGFloat = 10
         let interItemSpacing: CGFloat = 10
         
-        let width = (listCollectionView.frame.size.width-(itemsInRow - 1) * interItemSpacing) / itemsInRow
-        let height = width + 20
+        let width = (UIScreen.main.bounds.width-(itemsInRow - 1) * interItemSpacing) / itemsInRow
+        let height = width 
         
         layout.itemSize = CGSize(width: width - 20, height: height)
         layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)

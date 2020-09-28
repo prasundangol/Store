@@ -20,8 +20,8 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var addToCartButton: UIButton!
     @IBOutlet weak var increaseButton: UIButton!
     @IBOutlet weak var decreaseButton: UIButton!
-    @IBOutlet weak var itemsInCartCountLabel: UILabel!
-    @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var upperView: UIView!
+    @IBOutlet weak var totalPriceLabel: UILabel!
     
     var item = ItemModel()
     static let identifier = "DetailViewController"
@@ -30,7 +30,6 @@ class DetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.systemGray6
         configure()
         styling()
     }
@@ -41,6 +40,8 @@ class DetailViewController: UIViewController {
         titleLabel.text = item.Name
         priceLabel.text = ("Rs. ")+(item.Price!)
         quantityLabel.text = "1"
+        let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+        totalPriceLabel.text = ("Rs. ") + String(totalPrice)
         guard let stock = item.Stock else {return}
         if stock {
             stockLabel.textColor = .systemGreen
@@ -57,24 +58,21 @@ class DetailViewController: UIViewController {
         addToCartButton.clipsToBounds = true
         addToCartButton.layer.masksToBounds = true
         addToCartButton.layer.cornerRadius = 25
-        addToCartButton.tintColor = UIColor.black
         addToCartButton.buttonStyling()
-        //Utility.styleFilledButton(addToCartButton)
+
         Utility.styleIncreaseButton(increaseButton)
         Utility.styleDecreaseButton(decreaseButton)
         priceLabel.textColor = .systemGreen
         
-        //Bottom Layer Styling
-        bottomView.layer.masksToBounds = false
-        bottomView.clipsToBounds = false
-        bottomView.backgroundColor = UIColor.systemGray6
-        bottomView.layer.cornerRadius = 30
-        bottomView.layer.shadowColor = UIColor.black.cgColor
-        bottomView.layer.shadowOffset = CGSize(width: 2, height: 0)
-        bottomView.layer.shadowRadius = 5
-        bottomView.layer.shadowOpacity = 0.5
+        //Styling Upper View
+        upperView.clipsToBounds = false
+        upperView.layer.masksToBounds = false
+        upperView.layer.cornerRadius = 40
+        upperView.layer.shadowColor = UIColor.lightGray.cgColor
+        upperView.layer.shadowOffset = CGSize(width: 2, height: 3)
+        upperView.layer.shadowRadius = 5
+        upperView.layer.shadowOpacity = 0.5
         
-        itemsInCartCountLabel.text = "You have 3 items in cart"
     }
     
     
@@ -116,6 +114,8 @@ class DetailViewController: UIViewController {
         if Int(quantityLabel.text!)! > 1{
             let temp = Int(quantityLabel.text!)! - Int(1)
             quantityLabel.text = String(temp)
+            let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+            totalPriceLabel.text = ("Rs. ") + String(totalPrice)
         }
         
     }
@@ -125,6 +125,8 @@ class DetailViewController: UIViewController {
         if Int(quantityLabel.text!)! < 100{
             let temp = Int(quantityLabel.text!)! + Int(1)
             quantityLabel.text = String(temp)
+            let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+            totalPriceLabel.text = ("Rs. ") + String(totalPrice)
         }
     }
     

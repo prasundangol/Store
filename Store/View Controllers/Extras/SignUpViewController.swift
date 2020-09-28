@@ -21,22 +21,50 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var locationTextField: UITextField!
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
+    @IBOutlet weak var upperView: UIView!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
+        firstNameTextField.delegate = self
+        lastNameTextField.delegate = self
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
+        confirmPassword.delegate = self
+        phoneNumber.delegate = self
+        locationTextField.delegate = self
         styling()
     }
     
     private func styling(){
-        Utility.styleTextField(firstNameTextField)
-        Utility.styleTextField(lastNameTextField)
-        Utility.styleTextField(emailTextField)
-        Utility.styleTextField(passwordTextField)
-        Utility.styleTextField(confirmPassword)
-        Utility.styleTextField(phoneNumber)
-        Utility.styleTextField(locationTextField)
-        Utility.styleFilledButton(signUpButton)
+        firstNameTextField.notSelected()
+        lastNameTextField.notSelected()
+        emailTextField.notSelected()
+        passwordTextField.notSelected()
+        confirmPassword.notSelected()
+        phoneNumber.notSelected()
+        locationTextField.notSelected()
+        signUpButton.clipsToBounds = true
+        signUpButton.layer.masksToBounds = true
+        signUpButton.layer.cornerRadius = 25
+        signUpButton.buttonStyling()
+        
+        if #available(iOS 12, *) {
+            // iOS 12 & 13: Not the best solution, but it works.
+            passwordTextField.textContentType = .oneTimeCode
+            confirmPassword.textContentType = .oneTimeCode
+        } else {
+            // iOS 11: Disables the autofill accessory view.
+            // For more information see the explanation below.
+            emailTextField.textContentType = .init(rawValue: "")
+            passwordTextField.textContentType = .init(rawValue: "")
+            confirmPassword.textContentType = .init(rawValue: "")
+        }
+        
+        //Upper View Styling
+        upperView.clipsToBounds = false
+        upperView.layer.cornerRadius = 25
     }
     
     private func validateFields() -> String? {
@@ -76,6 +104,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpTapped(_ sender: Any) {
         
+        errorLabel.alpha = 0
         let error = validateFields()
         
         if error != nil{
@@ -131,4 +160,49 @@ class SignUpViewController: UIViewController {
         
     }
 
+}
+
+extension SignUpViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == emailTextField{
+            emailTextField.paddingLeft()
+        }
+        if textField == passwordTextField{
+            passwordTextField.paddingLeft()
+        }
+        
+        if textField == firstNameTextField{
+            firstNameTextField.paddingLeft()
+        }
+        if textField == lastNameTextField{
+            lastNameTextField.paddingLeft()
+        }
+        if textField == confirmPassword{
+            confirmPassword.paddingLeft()
+        }
+        if textField == locationTextField{
+            locationTextField.paddingLeft()
+        }
+        if textField == phoneNumber{
+            phoneNumber.paddingLeft()
+        }
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        firstNameTextField.notSelected()
+        lastNameTextField.notSelected()
+        emailTextField.notSelected()
+        passwordTextField.notSelected()
+        confirmPassword.notSelected()
+        phoneNumber.notSelected()
+        locationTextField.notSelected()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+        
+    }
+    
 }

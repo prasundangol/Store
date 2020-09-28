@@ -10,7 +10,7 @@ import  UIKit
 
 struct Consatnts {
     static let listSegue = "ShopToList"
-    static let normalColor = UIColor(red: 120, green: 187, blue: 148, alpha: 1)
+    static let darkColor = UIColor(red: 22.0/255.0 , green: 20.0/255.0 , blue: 44.0/255.0 , alpha: 1)
     static let shopToDetailSegue = "ShopToDetail"
     static let listToDetailSegue = "ListToDetail"
 }

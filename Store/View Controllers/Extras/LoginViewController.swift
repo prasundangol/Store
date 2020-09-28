@@ -24,6 +24,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        emailTextField.delegate = self
+        passwordTextField.delegate = self
         setUpElements()
         logoImage.image = UIImage(named: "logo")
         navigationController?.navigationBar.isHidden = true
@@ -33,15 +35,30 @@ class LoginViewController: UIViewController {
         errorLabel.alpha = 0
         
         //Styling the elements
-        Utility.styleTextField(emailTextField)
-        Utility.styleTextField(passwordTextField)
-        //Utility.buttonStyling(button: loginButton)
+        emailTextField.notSelected()
+        passwordTextField.notSelected()
+        
         loginButton.layer.masksToBounds = true
         loginButton.layer.cornerRadius = 25
         loginButton.tintColor = .black
         loginButton.buttonStyling()
-        Utility.styleHollowButton(signUpButton)
         
+        signUpButton.tintColor = UIColor.systemOrange
+        signUpButton.clipsToBounds = false
+        signUpButton.layer.masksToBounds = false
+        signUpButton.layer.shadowColor = UIColor.systemOrange.cgColor
+        signUpButton.layer.shadowOffset = CGSize(width: 2, height: 3)
+        signUpButton.layer.shadowRadius = 4
+        signUpButton.layer.shadowOpacity = 0.5
+        
+        if #available(iOS 12, *) {
+            // iOS 12 & 13: Not the best solution, but it works.
+            passwordTextField.textContentType = .oneTimeCode
+        } else {
+            // iOS 11: Disables the autofill accessory view.
+            emailTextField.textContentType = .init(rawValue: "")
+            passwordTextField.textContentType = .init(rawValue: "")
+        }
     }
     
     
@@ -75,6 +92,24 @@ class LoginViewController: UIViewController {
     }
     
 
+    
+}
+
+extension LoginViewController: UITextFieldDelegate{
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        if textField == emailTextField{
+            emailTextField.paddingLeft()
+        }
+        if textField == passwordTextField{
+            passwordTextField.paddingLeft()
+        }
+    }
+    
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        emailTextField.notSelected()
+        passwordTextField.notSelected()
+    }
     
 }
 
