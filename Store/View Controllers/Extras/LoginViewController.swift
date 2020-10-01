@@ -87,12 +87,6 @@ class LoginViewController: UIViewController {
     }
     
     
-    @IBAction func signUpTapped(_ sender: Any) {
-        
-    }
-    
-
-    
 }
 
 extension LoginViewController: UITextFieldDelegate{
@@ -109,6 +103,12 @@ extension LoginViewController: UITextFieldDelegate{
     func textFieldDidEndEditing(_ textField: UITextField) {
         emailTextField.notSelected()
         passwordTextField.notSelected()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+        textField.resignFirstResponder()
+        return true
+        
     }
     
 }

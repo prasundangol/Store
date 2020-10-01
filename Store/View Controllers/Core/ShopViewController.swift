@@ -36,7 +36,8 @@ class ShopViewController: UIViewController {
     }
     
     private func getData(){
-        FirebaseOperation.shared.getData(of: "Drinks") { (data) in
+        FirebaseOperation.shared.getData(of: "Drinks") { [weak self] (data) in
+            guard let self = self else {return}
             //self.itemModels.removeAll()
             self.itemModels.append(data)
             DispatchQueue.main.async {

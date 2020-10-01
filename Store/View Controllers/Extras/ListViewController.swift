@@ -26,18 +26,20 @@ class ListViewController: UIViewController {
         configureCell()
         setUpLayout()
         listCollectionView.showsVerticalScrollIndicator = false
-        FirebaseOperation.shared.getData(of: listTitle) { (data) in
-            self.model.append(data)
-            self.listCollectionView.reloadData()
-        }
-        // Do any additional setup after loading the view.
-        self.listCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
-        self.listCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10).isActive = true
+        getData()
     }
     
     private func configureCell(){
         listCollectionView.register(ListCollectionViewCell.nib() , forCellWithReuseIdentifier: ListCollectionViewCell.identifier)
         
+    }
+    
+    private func getData(){
+        FirebaseOperation.shared.getData(of: listTitle) { [weak self] (data) in
+            guard let self = self else {return}
+            self.model.append(data)
+            self.listCollectionView.reloadData()
+        }
     }
     
     private func setUpLayout(){
@@ -50,7 +52,7 @@ class ListViewController: UIViewController {
         let height = width 
         
         layout.itemSize = CGSize(width: width - 20, height: height)
-        layout.sectionInset = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        layout.sectionInset = UIEdgeInsets(top: 5, left: 15, bottom: 5, right: 15)
         layout.minimumLineSpacing = lineSpacing
         layout.minimumInteritemSpacing = interItemSpacing
         

@@ -61,7 +61,8 @@ class ItemsTableViewCell: UITableViewCell {
     }
     
     public func configureFirstSection(item: String){
-        FirebaseOperation.shared.getData(of: item) { (data) in
+        FirebaseOperation.shared.getData(of: item) { [weak self] (data) in
+            guard let self = self else {return}
             self.totalItems.removeAll()
             self.firstItemArray.append(data)
             self.totalItems.append(self.firstItemArray)
@@ -70,16 +71,17 @@ class ItemsTableViewCell: UITableViewCell {
             }
         }
     }
-        public func configureSecondSection(item: String){
-            FirebaseOperation.shared.getData(of: item) { (data) in
-                self.totalItems.removeAll()
-                self.secondItemArray.append(data)
-                self.totalItems.append(self.secondItemArray)
-                DispatchQueue.main.async {
-                    self.itemCollectionView.reloadData()
-                }
+    public func configureSecondSection(item: String){
+        FirebaseOperation.shared.getData(of: item) { [weak self] (data) in
+            guard let self = self else {return}
+            self.totalItems.removeAll()
+            self.secondItemArray.append(data)
+            self.totalItems.append(self.secondItemArray)
+            DispatchQueue.main.async {
+                self.itemCollectionView.reloadData()
             }
-
+        }
+        
 
     }
 }

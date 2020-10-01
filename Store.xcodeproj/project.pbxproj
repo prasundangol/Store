@@ -40,6 +40,7 @@
 		CDDB297625061237002EEE03 /* Store.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CDDB297425061237002EEE03 /* Store.xcdatamodeld */; };
 		CDDB29782506123B002EEE03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CDDB29772506123B002EEE03 /* Assets.xcassets */; };
 		CDDB297B2506123B002EEE03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CDDB29792506123B002EEE03 /* LaunchScreen.storyboard */; };
+		CDEA18502525D2CB00999B50 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA184F2525D2CB00999B50 /* CheckoutViewController.swift */; };
 		CDF1E8052511DA2F00739470 /* ListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF1E8032511DA2E00739470 /* ListTableViewCell.swift */; };
 		CDF1E8062511DA2F00739470 /* ListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CDF1E8042511DA2E00739470 /* ListTableViewCell.xib */; };
 /* End PBXBuildFile section */
@@ -80,6 +81,7 @@
 		CDDB29772506123B002EEE03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CDDB297A2506123B002EEE03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CDDB297C2506123B002EEE03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CDEA184F2525D2CB00999B50 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		CDF1E8032511DA2E00739470 /* ListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListTableViewCell.swift; sourceTree = "<group>"; };
 		CDF1E8042511DA2E00739470 /* ListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ListTableViewCell.xib; sourceTree = "<group>"; };
 		E8001CC61551CA5F6289D4FE /* Pods_Store.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Store.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -126,13 +128,13 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		CD01875525061BA30084A468 /* Cells */ = {
+		CD01875525061BA30084A468 /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CD01875625061BB70084A468 /* Table Cell */,
 				CD01875725061BC10084A468 /* Collection Cell */,
 			);
-			path = Cells;
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CD01875625061BB70084A468 /* Table Cell */ = {
@@ -180,6 +182,7 @@
 				CD27E0B42514D62800B66705 /* DetailViewController.swift */,
 				CD94FEA42515BAE800504B82 /* LoginViewController.swift */,
 				CD39ADA3251A246A00F6BE67 /* SignUpViewController.swift */,
+				CDEA184F2525D2CB00999B50 /* CheckoutViewController.swift */,
 			);
 			path = Extras;
 			sourceTree = "<group>";
@@ -218,7 +221,7 @@
 				CDDB296D25061237002EEE03 /* SceneDelegate.swift */,
 				CDC9BACB250C7A5C00DA6E66 /* Utilities */,
 				CD01874D25061A080084A468 /* View Controllers */,
-				CD01875525061BA30084A468 /* Cells */,
+				CD01875525061BA30084A468 /* Views */,
 				CDC9C9D02507847100E466C1 /* Model */,
 				CDDB297125061237002EEE03 /* Main.storyboard */,
 				CDDB29772506123B002EEE03 /* Assets.xcassets */,
@@ -367,6 +370,7 @@
 				CDC9C9CA250744D600E466C1 /* ItemsTableViewCell.swift in Sources */,
 				CDC9C9D22507848700E466C1 /* ItemModel.swift in Sources */,
 				CD01875A25061C800084A468 /* TitleTableViewCell.swift in Sources */,
+				CDEA18502525D2CB00999B50 /* CheckoutViewController.swift in Sources */,
 				CDDB297025061237002EEE03 /* ShopViewController.swift in Sources */,
 				CDC9BAD3250C7C3200DA6E66 /* ListViewController.swift in Sources */,
 				CD39ADA4251A246A00F6BE67 /* SignUpViewController.swift in Sources */,

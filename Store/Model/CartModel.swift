@@ -20,31 +20,30 @@ struct CartModel {
 
 class getDataFromCart{
     let ref = Database.database().reference().child("Cart")
-    let uid = Auth.auth().currentUser?.uid
     var itemList = [CartModel]()
     static let shared = getDataFromCart()
     
     
     func getData(completion: @escaping (([CartModel]) -> ())){
+        let uid = Auth.auth().currentUser?.uid
         guard let user = uid else {
             return
         }
         ref.child(user).observe(DataEventType.value) { (snapshot) in
-            if snapshot.childrenCount > 0{
-                self.itemList.removeAll()
-                for items in snapshot.children.allObjects as![DataSnapshot]{
-                    let itemObject = items.value as? [String: Any]
-                    let name = itemObject?["Name"] as! String
-                    let price = itemObject?["Price"] as! String
-                    let photo = itemObject?["Photo"] as! String
-                    let productId = itemObject?["ProductId"] as! String
-                    let quantity = itemObject?["Quantity"] as! String
-                    let item = CartModel(Name: name, ProductId: productId, Photo: photo, Price: price, Quantity: quantity)
-                    self.itemList.append(item)
-                    completion(self.itemList)
-                }
-                
+            self.itemList.removeAll()
+            for items in snapshot.children.allObjects as![DataSnapshot]{
+                let itemObject = items.value as? [String: Any]
+                let name = itemObject?["Name"] as! String
+                let price = itemObject?["Price"] as! String
+                let photo = itemObject?["Photo"] as! String
+                let productId = itemObject?["ProductId"] as! String
+                let quantity = itemObject?["Quantity"] as! String
+                let item = CartModel(Name: name, ProductId: productId, Photo: photo, Price: price, Quantity: quantity)
+                self.itemList.append(item)
+                completion(self.itemList)
             }
+            
+            
         }
     }
     
