@@ -66,8 +66,18 @@ class ListViewController: UIViewController {
             let destVC = segue.destination as! DetailViewController
             destVC.item = sender as! ItemModel
         }
+        if segue.identifier == Consatnts.listToSearch{
+            let destVC = segue.destination as! SearchViewController
+            destVC.tag = 0
+            destVC.item = listTitle
+            destVC.itemArray = sender as! [ItemModel]
+        }
     }
-
+    
+    @IBAction func didTapSearch(_ sender: Any) {
+        performSegue(withIdentifier: Consatnts.listToSearch, sender: model)
+    }
+    
 }
 
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource{

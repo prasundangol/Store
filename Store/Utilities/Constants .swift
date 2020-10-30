@@ -14,4 +14,9 @@ struct Consatnts {
     static let shopToDetailSegue = "ShopToDetail"
     static let listToDetailSegue = "ListToDetail"
     static let cartToCheckoutSegue = "cartToCheckout"
+    static let shopToSearchSegue = "shopToSearch"
+    static let listToSearch = "listToSearch"
+    static let orderToOrderDetail = "OrderToOrderDetail"
+    static let checkoutToOrderConfirmed = "CheckoutToOrderConfirmed"
+    static let itemList = ["Fruits", "Vegtables", "Drinks", "Snacks","Dairy", "Grocery"]
 }

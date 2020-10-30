@@ -137,6 +137,18 @@ class Utility{
         textfield.layer.addSublayer(bottomLine)
         
     }
+    
+    static func notifyAlert(title: String, viewcontroller: UIViewController){
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        viewcontroller.present(alert, animated: true, completion: nil)
+        
+        // delays execution of code to dismiss
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+            alert.dismiss(animated: true, completion: nil)
+            viewcontroller.dismiss(animated: true, completion: nil)
+            
+        })
+    }
 }
 
 extension UIView{

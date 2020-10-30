@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 import FirebaseAuth
 import FirebaseDatabase
 
@@ -14,6 +15,7 @@ class CartViewController: UIViewController {
     
     @IBOutlet weak var cartTableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    lazy var noItemImage = UIImageView()
     lazy var noItemLabel = UILabel()
     let vw = UIView()
     lazy var refreshControl = UIRefreshControl()
@@ -21,12 +23,14 @@ class CartViewController: UIViewController {
     private var cartItems = [CartModel]()
     private let ref = Database.database().reference().child("Cart")
     private var totalPrice = Int()
+    var timeStamp  = ServerValue.timestamp()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Cart"
+        navigationController?.navigationBar.tintColor = .systemGreen
         cartTableView.separatorStyle = .none
-        cartTableView.backgroundColor = UIColor.systemGray6
+        cartTableView.backgroundColor = UIColor.systemGray5
         guard let _ = Auth.auth().currentUser?.uid else{
             return
         }
@@ -45,6 +49,7 @@ class CartViewController: UIViewController {
         DispatchQueue.main.asyncAfter(wallDeadline: .now() + 4) {
             if self.cartItems.count == 0{
                 self.noItemLabel.isHidden = false
+                self.noItemImage.isHidden = false
                 self.activityIndicator.stopAnimating()
                 self.vw.isHidden = true
             }
@@ -67,27 +72,34 @@ class CartViewController: UIViewController {
     }
     
     private func labelSetUp(){
+        cartTableView.addSubview(noItemImage)
         cartTableView.addSubview(noItemLabel)
         
-        noItemLabel.text = "No Items Available"
-        let width = cartTableView.frame.width / 2 - 50
+        let width = cartTableView.frame.width / 2 - 40
+        let labelWidth = cartTableView.frame.height / 2 - 430
+        
+        noItemImage.image = UIImage(named: "emptyCart")
+        noItemImage.frame = CGRect(x: (cartTableView.frame.width/2) - 200, y: (cartTableView.frame.size.width - width)/2, width: 300, height: 300)
+        noItemLabel.text = "Your Cart is Empty"
         
         noItemLabel.frame = CGRect(x: 0,
-                                   y: (cartTableView.frame.size.width - width)/2,
+                                   y: (cartTableView.frame.size.height - labelWidth)/2,
                                    width: cartTableView.frame.size.width,
                                    height: 50)
-        noItemLabel.textColor = .systemGray2
+        noItemLabel.textColor = .systemGray
         noItemLabel.textAlignment = .center
         noItemLabel.font = UIFont(name: "HelveticaNeue-Medium", size: 23.0)
     }
     
-    private func getData(){
+     func getData(){
         getDataFromCart.shared.getData { [weak self] (data) in
             guard let self = self else {return}
             self.cartItems = data
             DispatchQueue.main.async {
+                self.totalPrice = 0
                 self.vw.isHidden = false
                 self.noItemLabel.isHidden = true
+                self.noItemImage.isHidden = true
                 self.activityIndicator.stopAnimating()
                 self.cartfooterView()
                 self.cartTableView.reloadData()
@@ -98,7 +110,7 @@ class CartViewController: UIViewController {
     private func cartfooterView(){
         
         vw.frame = CGRect(x: 0, y: 0, width: view.frame.size.width, height: 70)
-        vw.backgroundColor = UIColor.systemGray6
+        vw.backgroundColor = UIColor.systemGray5
         cartTableView.tableFooterView = vw
         
         let button = UIButton()
@@ -121,7 +133,7 @@ class CartViewController: UIViewController {
         button.setTitle("Checkout: Rs. \(String(totalPrice))", for: .normal)
         button.setTitleColor(Consatnts.darkColor, for: .normal)
         button.titleLabel?.font = UIFont(name: "HelveticaNeue-Medium", size: 18.0)
-        totalPrice = 0
+        //totalPrice = 0
 
         button.clipsToBounds = true
         button.layer.cornerRadius = 25
@@ -139,7 +151,7 @@ class CartViewController: UIViewController {
         if segue.identifier == Consatnts.cartToCheckoutSegue{
             let destVC = segue.destination as! CheckoutViewController
             destVC.checkOutItems = sender as! [CartModel]
-            
+            destVC.mrpPrice = totalPrice
         }
     }
     
@@ -161,6 +173,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         cartTableView.deselectRow(at: indexPath, animated: true)
+        let item = cartItems[indexPath.row]
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewController(withIdentifier: DetailViewController.identifier) as! DetailViewController
+        vc.tag = 1
+        vc.cartItem = item
+        self.navigationController?.present(vc, animated: true, completion: nil)
+        
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -180,6 +199,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource{
                 DispatchQueue.main.async {
                     self.vw.isHidden = true
                     self.noItemLabel.isHidden = false
+                    self.noItemImage.isHidden = false
                 }
             }
             

@@ -15,7 +15,7 @@ struct CartModel {
     var ProductId: String?
     var Photo: String?
     var Price: String?
-    var Quantity: String
+    var Quantity: String?
 }
 
 class getDataFromCart{

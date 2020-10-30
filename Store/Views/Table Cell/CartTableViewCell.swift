@@ -36,7 +36,7 @@ class CartTableViewCell: UITableViewCell {
         let url = URL(string: item.Photo!)
         itemImage.sd_setImage(with: url, placeholderImage: UIImage(named: "placeholder"), options: .highPriority)
         itemLabel.text = item.Name
-        quantityLabel.text = "Quantity: " + (item.Quantity)
+        quantityLabel.text = "Quantity: " + (item.Quantity!)
         priceLabel.text = "Rs. " + (item.Price!)
         
     }

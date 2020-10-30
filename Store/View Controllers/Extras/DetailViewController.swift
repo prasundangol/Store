@@ -24,6 +24,10 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var totalPriceLabel: UILabel!
     
     var item = ItemModel()
+    var cartItem = CartModel()
+    var tag = Int()
+    var price = Int()
+    var totalPrice = Int()
     static let identifier = "DetailViewController"
     private let userId = Auth.auth().currentUser
     private let ref = Database.database().reference().child("Cart")
@@ -35,21 +39,34 @@ class DetailViewController: UIViewController {
     }
     
     private func configure(){
-        guard let url = URL(string: item.Photo!) else { return }
-        itemImage.sd_setImage(with: url, placeholderImage: nil, options: .highPriority)
-        titleLabel.text = item.Name
-        priceLabel.text = ("Rs. ")+(item.Price!)
-        quantityLabel.text = "1"
-        let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
-        totalPriceLabel.text = ("Rs. ") + String(totalPrice)
-        guard let stock = item.Stock else {return}
-        if stock {
-            stockLabel.textColor = .systemGreen
+        if tag == 1{
+            guard let url = URL(string: cartItem.Photo!) else { return }
+            itemImage.sd_setImage(with: url, placeholderImage: nil, options: .highPriority)
+            titleLabel.text = cartItem.Name
+            quantityLabel.text = cartItem.Quantity
+            price = Int(cartItem.Price!)! / Int(cartItem.Quantity!)!
+            priceLabel.text = ("Rs. ")+(String(price))
+            totalPriceLabel.text = ("Rs. ") + String(cartItem.Price!)
             stockLabel.text = "In Stock"
+            stockLabel.textColor = .systemGreen
         }
         else{
-            stockLabel.textColor = .systemRed
-            stockLabel.text = "Out of Stock"
+            guard let url = URL(string: item.Photo!) else { return }
+            itemImage.sd_setImage(with: url, placeholderImage: nil, options: .highPriority)
+            titleLabel.text = item.Name
+            priceLabel.text = ("Rs. ")+(item.Price!)
+            quantityLabel.text = "1"
+            let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+            totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            guard let stock = item.Stock else {return}
+            if stock {
+                stockLabel.textColor = .systemGreen
+                stockLabel.text = "In Stock"
+            }
+            else{
+                stockLabel.textColor = .systemRed
+                stockLabel.text = "Out of Stock"
+            }
         }
        
     }
@@ -73,6 +90,10 @@ class DetailViewController: UIViewController {
         upperView.layer.shadowRadius = 5
         upperView.layer.shadowOpacity = 0.5
         
+        if tag == 1{
+            addToCartButton.setTitle("Update", for: .normal)
+        }
+        
     }
     
     
@@ -89,33 +110,41 @@ class DetailViewController: UIViewController {
                        "Quantity": quantityLabel.text!
                         ]
             ref.child(uid).child(item.Name!).setValue(add)
-            addedToCartAlert()
+            Utility.notifyAlert(title: "Added to Cart", viewcontroller: self)
+            
             
         }
         
     }
     
-    private func addedToCartAlert(){
-        let alert = UIAlertController(title: "Added To Cart", message: "", preferredStyle: .alert)
-        self.present(alert, animated: true, completion: nil)
-        
-        // delays execution of code to dismiss
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
-            alert.dismiss(animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-            
-        })
-        
-        
+    private func updateCart(){
+            if let user = userId{
+                let uid = user.uid
+                
+                let add = ["Price": String(totalPrice),
+                           "Quantity": quantityLabel.text ?? "1",
+                    ] 
+                
+                ref.child(uid).child(cartItem.Name!).updateChildValues(add as [AnyHashable : Any])
+                Utility.notifyAlert(title: "Updated", viewcontroller: self)
+            }
     }
+    
     
 
     @IBAction func decreaseButtonTapped(_ sender: Any) {
         if Int(quantityLabel.text!)! > 1{
             let temp = Int(quantityLabel.text!)! - Int(1)
             quantityLabel.text = String(temp)
-            let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
-            totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            if tag == 1{
+                totalPrice = price * temp
+                totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+
+            }
+            else{
+                let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+                totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            }
         }
         
     }
@@ -125,26 +154,36 @@ class DetailViewController: UIViewController {
         if Int(quantityLabel.text!)! < 100{
             let temp = Int(quantityLabel.text!)! + Int(1)
             quantityLabel.text = String(temp)
-            let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
-            totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            if tag == 1{
+                totalPrice = price * temp
+                totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            }
+            else{
+                let totalPrice = Int(String(item.Price!))! * Int(String(quantityLabel.text!))!
+                totalPriceLabel.text = ("Rs. ") + String(totalPrice)
+            }
         }
     }
     
     
     @IBAction func addToCartTapped(_ sender: Any) {
-        guard let stock = item.Stock else {return}
-        guard let _ = userId else{
-            Utility.alert(title: "Cannot Add To Cart", msg: "You must login to add products to cart.", viewcontroller: self)
-            return
-        }
-        if stock{
-            sendToCart()
+        if tag == 1{
+            updateCart()
         }
         else{
-            Utility.alert(title: "Out Of Stock", msg: "Sorry! The product is out of stock.", viewcontroller: self)
+            guard let stock = item.Stock else {return}
+            guard let _ = userId else{
+                Utility.alert(title: "Cannot Add To Cart", msg: "You must login to add products to cart.", viewcontroller: self)
+                return
+            }
+            if stock{
+                sendToCart()
+            }
+            else{
+                Utility.alert(title: "Out Of Stock", msg: "Sorry! The product is out of stock.", viewcontroller: self)
+            }
         }
+        
     }
-    
-    
 }
 

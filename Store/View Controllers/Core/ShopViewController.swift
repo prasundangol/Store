@@ -16,12 +16,14 @@ class ShopViewController: UIViewController {
     static let identifier = "ShopViewController"
     private let itemController = ItemsTableViewCell()
     private var itemModels = [ItemModel]()
-    var sectionItems = [String]()
-    private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks"]
+    private let titles = ["Fruits", "Vegtables", "Drinks", "Snacks","Dairy", "Grocery"]
+    var resultSet = Set<String>()
+    var resultArray = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Shop"
+        getRandomElements()
         activityIndicator.startAnimating()
         navigationController?.navigationBar.tintColor = UIColor.systemGreen
         titleTable.delegate = self
@@ -29,14 +31,10 @@ class ShopViewController: UIViewController {
         getData()
         configureCell()
         titleTable.showsVerticalScrollIndicator = false
-        for _ in 1...2{
-            sectionItems.append(titles.randomElement()!)
-        }
-
     }
     
     private func getData(){
-        FirebaseOperation.shared.getData(of: "Drinks") { [weak self] (data) in
+        FirebaseOperation.shared.getData(of: resultArray[2]) { [weak self] (data) in
             guard let self = self else {return}
             //self.itemModels.removeAll()
             self.itemModels.append(data)
@@ -60,7 +58,25 @@ class ShopViewController: UIViewController {
             destVC.item = sender as! ItemModel
             
         }
+        
+        if segue.identifier == Consatnts.shopToSearchSegue{
+            let destVC = segue.destination as! SearchViewController
+            destVC.tag = 1
+        }
     }
+    
+    private func getRandomElements(){
+        while resultSet.count < 3 {
+            let randomIndex = Int(arc4random_uniform(UInt32(titles.count)))
+            resultSet.insert(titles[randomIndex])
+        }
+         resultArray = Array(resultSet)
+    }
+    
+    @IBAction func didTapSearch(_ sender: Any) {
+        performSegue(withIdentifier: Consatnts.shopToSearchSegue, sender: nil)
+    }
+    
 }
 
 extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
@@ -87,12 +103,12 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
         switch indexPath.section {
         case 1 :
             let cell =  titleTable.dequeueReusableCell(withIdentifier: ItemsTableViewCell.identifier, for: indexPath) as! ItemsTableViewCell
-            cell.configureFirstSection(item: titles[0])
+            cell.configureFirstSection(item: resultArray[0])
             cell.delegate = self
             return cell
         case 2:
             let cell =  titleTable.dequeueReusableCell(withIdentifier: ItemsTableViewCell.identifier, for: indexPath) as! ItemsTableViewCell
-            cell.configureFirstSection(item: titles[1])
+            cell.configureFirstSection(item: resultArray[1])
             cell.delegate = self
             return cell
             
@@ -116,7 +132,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let cell = titleTable.dequeueReusableCell(withIdentifier: HeaderTableViewCell.identifier) as! HeaderTableViewCell
-        cell.configure(item: titles[section - 1])
+        cell.configure(item: resultArray[section - 1])
         cell.delegate = self
         return cell
     }
