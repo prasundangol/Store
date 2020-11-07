@@ -22,11 +22,13 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var signUpButton: UIButton!
     @IBOutlet weak var errorLabel: UILabel!
     @IBOutlet weak var upperView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         errorLabel.alpha = 0
+        activityIndicator.hidesWhenStopped = true
         firstNameTextField.delegate = self
         lastNameTextField.delegate = self
         emailTextField.delegate = self
@@ -56,7 +58,6 @@ class SignUpViewController: UIViewController {
             confirmPassword.textContentType = .oneTimeCode
         } else {
             // iOS 11: Disables the autofill accessory view.
-            // For more information see the explanation below.
             emailTextField.textContentType = .init(rawValue: "")
             passwordTextField.textContentType = .init(rawValue: "")
             confirmPassword.textContentType = .init(rawValue: "")
@@ -104,6 +105,7 @@ class SignUpViewController: UIViewController {
     
     @IBAction func signUpTapped(_ sender: Any) {
         
+        activityIndicator.startAnimating()
         errorLabel.alpha = 0
         let error = validateFields()
         
@@ -147,12 +149,13 @@ class SignUpViewController: UIViewController {
     
     private func showError(_ message: String){
         errorLabel.text = message
+        activityIndicator.stopAnimating()
         errorLabel.alpha = 1
         
     }
     
     func transitionToStore(){
-        
+        activityIndicator.stopAnimating()
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let initial = storyboard.instantiateInitialViewController()
         self.view.window?.rootViewController = initial

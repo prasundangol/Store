@@ -149,6 +149,18 @@ class Utility{
             
         })
     }
+    
+    static func sucessfulAlert(title: String, navigation: UINavigationController, viewcontroller: UIViewController){
+        let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
+        viewcontroller.present(alert, animated: true, completion: nil)
+        
+        // delays execution of code to dismiss
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+            alert.dismiss(animated: true, completion: nil)
+            navigation.popViewController(animated: false)
+            
+        })
+    }
 }
 
 extension UIView{
@@ -169,9 +181,9 @@ extension UIView{
     func backgroundGradient(){
         let gradient = CAGradientLayer()
         gradient.frame = bounds
-        //let color1 = UIColor(red: 175/255.0, green: 241/255.0, blue: 218/255.0, alpha: 1.0)
-        let color2 = UIColor(red: 250/255.0, green: 238/255.0, blue: 158/255.0, alpha: 1.0)
-        gradient.colors = [color2.cgColor, UIColor.white.cgColor]
+        let color1 = UIColor(red: 244.0/255.0, green: 208/255.0, blue: 63.0/255.0, alpha: 1.0)
+        let color2 = UIColor(red: 22.0/255.0, green: 160.0/255.0, blue: 133.0/255.0, alpha: 1.0)
+        gradient.colors = [UIColor.systemGreen.cgColor, UIColor.systemGray6.cgColor]
         gradient.locations = [0.0,1.0]
         gradient.startPoint = CGPoint(x: 1.0, y: 1.0)
         gradient.endPoint = CGPoint(x: 0.0, y: 0.0)
@@ -209,6 +221,18 @@ extension UITextField{
         
     }
     
+}
+
+extension UIButton {
+    func underline() {
+        guard let text = self.titleLabel?.text else { return }
+        let attributedString = NSMutableAttributedString(string: text)
+        //NSAttributedStringKey.foregroundColor : UIColor.blue
+        attributedString.addAttribute(NSAttributedString.Key.underlineColor, value: self.titleColor(for: .normal)!, range: NSRange(location: 0, length: text.count))
+        attributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: self.titleColor(for: .normal)!, range: NSRange(location: 0, length: text.count))
+        attributedString.addAttribute(NSAttributedString.Key.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: NSRange(location: 0, length: text.count))
+        self.setAttributedTitle(attributedString, for: .normal)
+    }
 }
 
 

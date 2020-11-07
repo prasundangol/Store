@@ -59,12 +59,18 @@ class CheckoutViewController: UIViewController {
             let time = getDate()
             let dateData = Date().timeIntervalSince1970
             let timestamp = Int(-dateData)
+            var payment = String()
+            
+            if cashOnDeliveryButton.isSelected == true{
+                payment = "Cash on Delivery"
+            }
             
             for item in checkOutItems{
                 let add = ["Name": item.Name,
                            "Price": item.Price,
                            "Quantity": item.Quantity,
                            "ProductId": item.ProductId,
+                           "payment": payment
                            ]
                 ref.child(uid).child(time).child("data").child(item.Name!).setValue(add)
                 ref.child(uid).child(time).child("data").child("timestamp").setValue(timestamp)

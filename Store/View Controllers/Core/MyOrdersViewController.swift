@@ -110,9 +110,6 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource{
         let cell = orderTableView.dequeueReusableCell(withIdentifier: OrdersTableViewCell.identifier, for: indexPath) as! OrdersTableViewCell
         let item = sortedItems[indexPath.section][indexPath.row]
         cell.configure(item: item)
-//        if indexPath.row == 4{
-//            cell.dotDotDot()
-//        }
         return cell
     }
     
@@ -146,12 +143,23 @@ extension MyOrdersViewController: UITableViewDelegate, UITableViewDataSource{
         let vw = UIView()
         vw.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 60)
         vw.backgroundColor = .systemGray5
-        let button = UIButton(frame: CGRect(x: 0, y: 1, width: vw.frame.size.width, height: 40))
+        let button = UIButton(frame: CGRect(x: 0, y: 1, width: vw.frame.size.width, height: 35))
+        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 40)
+        button.setImage(UIImage(named: "next"), for: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: -45)
         button.setTitle("View All", for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18)
+        button.contentHorizontalAlignment = .right
+        button.titleLabel?.font = UIFont(name: "HelveticaNeue", size: 17)
         button.setTitleColor(.systemOrange, for: .normal)
+        button.underline()
         button.tag = section
         button.addTarget(self, action: #selector(viewAllTapped(sender: )), for: .touchUpInside)
+        button.layer.masksToBounds = false
+        button.clipsToBounds = false
+        button.layer.shadowOpacity = 0.3
+        button.layer.shadowRadius = 3
+        button.layer.shadowOffset = CGSize(width: 3, height: 4)
+        button.layer.shadowColor = UIColor.black.cgColor
         button.backgroundColor = UIColor.white
         vw.addSubview(button)
         

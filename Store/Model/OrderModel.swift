@@ -56,7 +56,8 @@ class getDataFromOrders{
                         let price = itemObject?["Price"] as! String
                         let productId = itemObject?["ProductId"] as! String
                         let quantity = itemObject?["Quantity"] as! String
-                        let item = CartModel(Name: name, ProductId: productId, Price: price, Quantity: quantity)
+                        let payment = itemObject?["payment"] as! String
+                        let item = CartModel(Name: name, ProductId: productId, Price: price, Quantity: quantity, payment: payment)
                         self.itemList.append(item)
                         }
                     }
